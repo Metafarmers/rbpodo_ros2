@@ -21,16 +21,26 @@ def generate_launch_description():
         )
     )
 
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_fake_hardware",
+            default_value="false",
+            description="Flag to enable fake hardware. If true, the robot will connect to IsaacSim.",
+        )
+    )
     return LaunchDescription(
         declared_arguments + [OpaqueFunction(function=launch_setup)]
     )
 
 
 def launch_setup(context, *args, **kwargs):
+
+    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+
     mappings = {
         "robot_ip": "192.168.50.101",
         "cb_simulation": "false",
-        "use_fake_hardware": "false",
+        "use_fake_hardware": use_fake_hardware,
         "fake_sensor_commands": "false",
     }
 
@@ -126,7 +136,7 @@ def launch_setup(context, *args, **kwargs):
     )
 
     nodes_to_start = [
-        # rviz_node,
+        rviz_node,
         static_tf,
         robot_state_publisher,
         run_move_group_node,

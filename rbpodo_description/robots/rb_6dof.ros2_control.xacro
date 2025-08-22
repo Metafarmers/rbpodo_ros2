@@ -5,9 +5,12 @@
     <ros2_control name="RBPodoHardwareInterface" type="system">
       <hardware>
         <xacro:if value="${use_fake_hardware}">
-          <plugin>mock_components/GenericSystem</plugin>
+          <!-- <plugin>mock_components/GenericSystem</plugin>
           <param name="mock_sensor_commands">${fake_sensor_commands}</param>
-          <param name="state_following_offset">0.0</param>
+          <param name="state_following_offset">0.0</param> -->
+          <plugin>topic_based_ros2_control/TopicBasedSystem</plugin>
+          <param name="joint_commands_topic">joint_commands</param>
+          <param name="joint_states_topic">joint_states_sim</param>
         </xacro:if>
         <xacro:unless value="${use_fake_hardware}">
           <plugin>rbpodo_hardware/RBPodoHardwareInterface</plugin>
