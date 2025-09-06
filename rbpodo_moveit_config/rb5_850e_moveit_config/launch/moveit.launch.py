@@ -8,6 +8,7 @@ from launch_ros.substitutions import FindPackageShare
 from launch.actions import ExecuteProcess
 from ament_index_python.packages import get_package_share_directory
 from moveit_configs_utils import MoveItConfigsBuilder
+from mflib.common.behavior_tree_impl_v3 import BehaviorTreeServerNodeV3
 
 
 def generate_launch_description():
@@ -34,6 +35,7 @@ def generate_launch_description():
 
 
 def launch_setup(context, *args, **kwargs):
+    use_sim_time = BehaviorTreeServerNodeV3.get_use_sim_time()
 
     use_fake_hardware = LaunchConfiguration("use_fake_hardware")
 
@@ -62,7 +64,8 @@ def launch_setup(context, *args, **kwargs):
         package="moveit_ros_move_group",
         executable="move_group",
         output="screen",
-        parameters=[moveit_config.to_dict()],
+        parameters=[moveit_config.to_dict(),
+                    {"use_sim_time": use_sim_time}],
     )
 
     rviz_base = LaunchConfiguration("rviz_config")
@@ -83,6 +86,7 @@ def launch_setup(context, *args, **kwargs):
             moveit_config.robot_description_kinematics,
             moveit_config.planning_pipelines,
             moveit_config.joint_limits,
+            {"use_sim_time": use_sim_time}
         ],
     )
 
@@ -93,6 +97,7 @@ def launch_setup(context, *args, **kwargs):
         name="static_transform_publisher",
         output="log",
         arguments=["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "manipulator_base_link", "link0"],
+        parameters=[{"use_sim_time": use_sim_time}]
     )
 
     # Publish TF
@@ -101,7 +106,12 @@ def launch_setup(context, *args, **kwargs):
         executable="robot_state_publisher",
         name="robot_state_publisher",
         output="both",
-        parameters=[moveit_config.robot_description],
+        # parameters=[moveit_config.robot_description,
+        #             ],
+        parameters=[
+            dict(moveit_config.robot_description),
+            {"use_sim_time": use_sim_time},
+        ],
     )
 
     # ros2_control using FakeSystem as hardware
@@ -113,7 +123,11 @@ def launch_setup(context, *args, **kwargs):
     ros2_control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[moveit_config.robot_description, ros2_controllers_path],
+        parameters=[
+            moveit_config.robot_description,
+            ros2_controllers_path,
+            {"use_sim_time": use_sim_time},   # 추가
+        ],        
         output="both",
     )
 
@@ -127,12 +141,14 @@ def launch_setup(context, *args, **kwargs):
             "--controller-manager",
             "/controller_manager",
         ],
+        parameters=[{"use_sim_time": use_sim_time}],   # 추가
     )
 
     arm_controller_spawner = Node(
         package="controller_manager",
         executable="spawner",
         arguments=["joint_trajectory_controller", "-c", "/controller_manager"],
+        parameters=[{"use_sim_time": use_sim_time}],   # 추가
     )
 
     nodes_to_start = [
