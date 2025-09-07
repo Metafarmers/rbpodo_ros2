@@ -22,13 +22,6 @@ def generate_launch_description():
         )
     )
 
-    declared_arguments.append(
-        DeclareLaunchArgument(
-            "use_fake_hardware",
-            default_value="false",
-            description="Flag to enable fake hardware. If true, the robot will connect to IsaacSim.",
-        )
-    )
     return LaunchDescription(
         declared_arguments + [OpaqueFunction(function=launch_setup)]
     )
@@ -36,8 +29,7 @@ def generate_launch_description():
 
 def launch_setup(context, *args, **kwargs):
     use_sim_time = BehaviorTreeServerNodeV3.get_use_sim_time()
-
-    use_fake_hardware = LaunchConfiguration("use_fake_hardware")
+    use_fake_hardware = "true" if use_sim_time else "false"
 
     mappings = {
         "robot_ip": "192.168.50.101",
@@ -127,7 +119,7 @@ def launch_setup(context, *args, **kwargs):
             moveit_config.robot_description,
             ros2_controllers_path,
             {"use_sim_time": use_sim_time},   # 추가
-        ],        
+        ],
         output="both",
     )
 
