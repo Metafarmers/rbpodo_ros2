@@ -83,14 +83,14 @@ def launch_setup(context, *args, **kwargs):
     )
 
     # Static TF
-    static_tf = Node(
-        package="tf2_ros",
-        executable="static_transform_publisher",
-        name="static_transform_publisher",
-        output="log",
-        arguments=["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "manipulator_base_link", "link0"],
-        parameters=[{"use_sim_time": use_sim_time}]
-    )
+    # static_tf = Node(
+    #     package="tf2_ros",
+    #     executable="static_transform_publisher",
+    #     name="static_transform_publisher",
+    #     output="log",
+    #     arguments=["0.0", "0.0", "0.0", "0.0", "0.0", "0.0", "manipulator_base_link", "link0"],
+    #     parameters=[{"use_sim_time": use_sim_time}]
+    # )
 
     # Publish TF
     robot_state_publisher = Node(
@@ -145,7 +145,7 @@ def launch_setup(context, *args, **kwargs):
 
     nodes_to_start = [
         rviz_node,
-        static_tf,
+        # static_tf,
         robot_state_publisher,
         run_move_group_node,
         ros2_control_node,
