@@ -30,12 +30,13 @@ def generate_launch_description():
 def launch_setup(context, *args, **kwargs):
     use_sim_time = BehaviorTreeServerNodeV3.get_use_sim_time()
     use_fake_hardware = "true" if use_sim_time else "false"
+    robot_ip = "10.0.2.7" if use_sim_time else "192.168.50.101"
 
     mappings = {
-        "robot_ip": "192.168.50.101",
-        "cb_simulation": "false",
-        "use_fake_hardware": use_fake_hardware,
-        "fake_sensor_commands": "false",
+        "robot_ip": robot_ip,
+        "cb_simulation": use_fake_hardware,
+        "use_fake_hardware": 'false', #use_fake_hardware,
+        "fake_sensor_commands": 'false', #use_fake_hardware,
     }
 
     moveit_config = (
