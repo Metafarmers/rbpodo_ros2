@@ -35,7 +35,7 @@ def launch_setup(context, *args, **kwargs):
     mappings = {
         "robot_ip": robot_ip,
         "cb_simulation": use_fake_hardware,
-        "use_fake_hardware": 'false', #use_fake_hardware,
+        "use_fake_hardware": use_fake_hardware,
         "fake_sensor_commands": 'false', #use_fake_hardware,
     }
 
@@ -140,7 +140,7 @@ def launch_setup(context, *args, **kwargs):
         run_move_group_node,
         ros2_control_node,
         joint_state_broadcaster_spawner,
-        # arm_controller_spawner,
+        arm_controller_spawner,
     ]
 
     return nodes_to_start
