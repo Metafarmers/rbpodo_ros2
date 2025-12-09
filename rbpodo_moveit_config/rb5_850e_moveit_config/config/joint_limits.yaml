@@ -8,32 +8,32 @@ default_acceleration_scaling_factor: 0.3
 # Joint limits can be turned off with [has_velocity_limits, has_acceleration_limits]
 joint_limits:
   base:
-    has_velocity_limits: false
+    has_velocity_limits: true
     max_velocity: 3.14
     has_acceleration_limits: false
     max_acceleration: 0.0
   elbow:
-    has_velocity_limits: false
+    has_velocity_limits: true
     max_velocity: 3.14
     has_acceleration_limits: false
     max_acceleration: 0.0
   shoulder:
-    has_velocity_limits: false
+    has_velocity_limits: true
     max_velocity: 3.14
     has_acceleration_limits: false
     max_acceleration: 0.0
   wrist1:
-    has_velocity_limits: false
+    has_velocity_limits: true
     max_velocity: 3.14
     has_acceleration_limits: false
     max_acceleration: 0.0
   wrist2:
-    has_velocity_limits: false
+    has_velocity_limits: true
     max_velocity: 3.14
     has_acceleration_limits: false
     max_acceleration: 0.0
   wrist3:
-    has_velocity_limits: false
+    has_velocity_limits: true
     max_velocity: 3.14
     has_acceleration_limits: false
     max_acceleration: 0.0
