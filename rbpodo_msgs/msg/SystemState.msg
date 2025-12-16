@@ -28,9 +28,9 @@ bool        is_freedrive_mode             # free-drive (Gravity-compensation) On
 bool        real_vs_simulation_mode       # mode of operation: Simulation mode=true / Real Robot mode=false
 int8        init_state_info               # robot arm activation (Initialization) stage info (0 -> 6)
 int32       init_error                    # error code during the arm activation (return value for UI)
-float32[2]  tfb_analog_in                 # robot-tool-mf_flange analog input measurement information of each channel (unit: Voltage)
-bool[2]     tfb_digital_in                # robot-tool-mf_flange digital input measurement information of each channel 
-bool[2]     tfb_digital_out               # robot-tool-mf_flange digital output information of each channel
+float32[2]  tfb_analog_in                 # robot-tool-mf_manipulator_end_link analog input measurement information of each channel (unit: Voltage)
+bool[2]     tfb_digital_in                # robot-tool-mf_manipulator_end_link digital input measurement information of each channel 
+bool[2]     tfb_digital_out               # robot-tool-mf_manipulator_end_link digital output information of each channel
 float32     tfb_voltage_out               # robot-Tool-Flage output voltage level (unit: Voltage)
 bool        op_stat_collision_occur       # if true, out-collision is detected
 int8        op_stat_sos_flag              # robot Arm device error code during operation
