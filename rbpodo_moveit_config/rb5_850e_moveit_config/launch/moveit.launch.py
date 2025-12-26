@@ -21,6 +21,27 @@ def generate_launch_description():
             description="RViz configuration file",
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "robot_ip",
+            default_value="",
+            description="Robot IP address",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_fake_hardware",
+            default_value="false",
+            description="Use fake hardware",
+        )
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "use_rviz",
+            default_value="true",
+            description="Launch RViz",
+        )
+    )
 
     return LaunchDescription(
         declared_arguments + [OpaqueFunction(function=launch_setup)]
@@ -29,8 +50,22 @@ def generate_launch_description():
 
 def launch_setup(context, *args, **kwargs):
     use_sim_time = BehaviorTreeServerNodeV3.get_use_sim_time()
-    use_fake_hardware = "true" if use_sim_time else "false"
-    robot_ip = "10.0.2.7" if use_sim_time else "192.168.50.101"
+    # Get launch arguments, with fallback to defaults
+    robot_ip_arg = context.launch_configurations.get('robot_ip', '')
+    use_fake_hardware_arg = context.launch_configurations.get('use_fake_hardware', '')
+
+    # Use launch arguments if provided, otherwise use defaults
+    if robot_ip_arg:
+        robot_ip = robot_ip_arg
+    else:
+        robot_ip = "10.0.2.7" if use_sim_time else "192.168.50.101"
+
+    if use_fake_hardware_arg:
+        use_fake_hardware = use_fake_hardware_arg
+    else:
+        use_fake_hardware = "true" if use_sim_time else "false"
+
+    use_rviz = context.launch_configurations.get('use_rviz', 'true')
 
     mappings = {
         "robot_ip": robot_ip,
@@ -135,12 +170,15 @@ def launch_setup(context, *args, **kwargs):
     )
 
     nodes_to_start = [
-        rviz_node,
         robot_state_publisher,
         run_move_group_node,
         ros2_control_node,
         joint_state_broadcaster_spawner,
         arm_controller_spawner,
     ]
+
+    # Only add rviz_node if use_rviz is true
+    if use_rviz.lower() == 'true':
+        nodes_to_start.append(rviz_node)
 
     return nodes_to_start
