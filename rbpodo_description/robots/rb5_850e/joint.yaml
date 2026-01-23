@@ -7,10 +7,10 @@ base:
   axis:
     xyz: 0 0 1
   limit:
-    lower: -3.14
-    upper: 3.14
+    lower: -3.14159
+    upper: 3.14159
     effort: 10
-    velocity: 3.14
+    velocity: 3.14159
 
 shoulder:
   origin:
@@ -21,10 +21,10 @@ shoulder:
   axis:
     xyz: 0 1 0
   limit:
-    lower: -3.14
-    upper: 3.14
+    lower: -3.14159
+    upper: 3.14159
     effort: 10
-    velocity: 3.14
+    velocity: 3.14159
 
 elbow:
   origin:
@@ -35,10 +35,10 @@ elbow:
   axis:
     xyz: 0 1 0
   limit:
-    lower: -3.14
-    upper: 3.14
+    lower: -3.14159
+    upper: 3.14159
     effort: 10
-    velocity: 3.14
+    velocity: 3.14159
 
 wrist1:
   origin:
@@ -49,10 +49,10 @@ wrist1:
   axis:
     xyz: 0 1 0
   limit:
-    lower: -3.14
-    upper: 3.14
+    lower: -3.14159
+    upper: 3.14159
     effort: 10
-    velocity: 3.14
+    velocity: 3.14159
 
 wrist2:
   origin:
@@ -63,10 +63,10 @@ wrist2:
   axis:
     xyz: 0 0 1
   limit:
-    lower: -3.14
-    upper: 3.14
+    lower: -3.14159
+    upper: 3.14159
     effort: 10
-    velocity: 3.14
+    velocity: 3.14159
 
 wrist3:
   origin:
@@ -77,7 +77,7 @@ wrist3:
   axis:
     xyz: 0 1 0
   limit:
-    lower: -3.14
-    upper: 3.14
+    lower: -3.14159
+    upper: 3.14159
     effort: 10
-    velocity: 3.14
+    velocity: 3.14159
