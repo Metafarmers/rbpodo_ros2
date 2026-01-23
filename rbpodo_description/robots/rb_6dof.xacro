@@ -51,7 +51,7 @@
 
   <xacro:macro name="rb_6dof" params="model_id prefix='' tcp_name='tcp' tcp_xyz='0 0 0' tcp_rpy='0 0 0'">
     <xacro:link name="link0" prefix="${prefix}" has_inertial="false" />
-    <xacro:link name="link1" s="${prefix}" />
+    <xacro:link name="link1" prefix="${prefix}" />
     <xacro:link name="link2" prefix="${prefix}" />
     <xacro:link name="link3" prefix="${prefix}" />
     <xacro:link name="link4" prefix="${prefix}" />
