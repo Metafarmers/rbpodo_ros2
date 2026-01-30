@@ -21,7 +21,7 @@ shoulder:
   axis:
     xyz: 0 1 0
   limit:
-    lower: -6.28
+    lower: -3.14
     upper: 3.14
     effort: 10
     velocity: 3.14159
@@ -35,8 +35,8 @@ elbow:
   axis:
     xyz: 0 1 0
   limit:
-    lower: -6.28
-    upper: 6.28
+    lower: -3.14
+    upper: 3.14
     effort: 10
     velocity: 3.14159
 
