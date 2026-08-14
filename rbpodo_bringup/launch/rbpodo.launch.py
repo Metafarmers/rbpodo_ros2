@@ -2,9 +2,8 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, Shutdown
-from launch.conditions import IfCondition, UnlessCondition
-from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch.actions import DeclareLaunchArgument, Shutdown
+from launch.conditions import IfCondition
 from launch.substitutions import (
     Command,
     FindExecutable,
@@ -14,7 +13,6 @@ from launch.substitutions import (
 )
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
-import xacro
 
 
 def generate_launch_description():
@@ -67,9 +65,7 @@ def generate_launch_description():
             DeclareLaunchArgument(
                 cb_simulation_parameter_name,
                 default_value="false",
-                description="Select RB Control Box mode, Simulation or Real".format(
-                    cb_simulation_parameter_name
-                ),
+                description="Select RB Control Box mode, Simulation or Real",
             ),
             DeclareLaunchArgument(
                 robot_ip_parameter_name,
