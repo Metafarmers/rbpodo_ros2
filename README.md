@@ -62,3 +62,12 @@ ros2 launch rbpodo_bringup rbpodo.launch.py model_id:=rb3_730es_u use_fake_hardw
 source ~/rbpodo_ros2_ws/install/setup.bash
 ros2 launch rbpodo_moveit_config moveit.launch.py model_id:="rb5_850e" use_fake_hardware:=false cb_simulation:=false robot_ip:="10.0.2.7" 
 ```
+
+## RB5 absolute J1 target contract
+
+RB5 `base` (J1), `wrist1`, `wrist2`, and `wrist3` are bounded revolute joints
+with a physical range of `[-2π, +2π]` radians (±360°). Their URDF limits
+intentionally include the exact endpoints, so a command at `+2π` is a valid
+absolute one-turn target rather than a wrapped `0` target. The driver and
+planning layers must retain the absolute value in joint-state and trajectory
+messages; they must not normalize it modulo 2π.

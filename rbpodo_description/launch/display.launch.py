@@ -19,7 +19,7 @@ def generate_launch_description():
         description="Flag to enable joint_state_publisher_gui",
     )
     ld.add_action(gui_arg)
-    
+
     rviz_arg = DeclareLaunchArgument(
         name="rvizconfig",
         default_value=default_rviz_config_path,

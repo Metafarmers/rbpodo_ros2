@@ -7,8 +7,10 @@ base:
   axis:
     xyz: 0 0 1
   limit:
-    lower: -6.28
-    upper: 6.28
+    # RB5 J1/base is a bounded ±360° joint.  Keep the exact 2π endpoint so
+    # an absolute one-turn target is not rejected as slightly out of range.
+    lower: -6.283185307179586
+    upper: 6.283185307179586
     effort: 10
     velocity: 3.14159
 
@@ -49,8 +51,8 @@ wrist1:
   axis:
     xyz: 0 1 0
   limit:
-    lower: -6.28
-    upper: 6.28
+    lower: -6.283185307179586
+    upper: 6.283185307179586
     effort: 10
     velocity: 3.14159
 
@@ -63,8 +65,8 @@ wrist2:
   axis:
     xyz: 0 0 1
   limit:
-    lower: -6.28
-    upper: 6.28
+    lower: -6.283185307179586
+    upper: 6.283185307179586
     effort: 10
     velocity: 3.14159
 
@@ -77,7 +79,7 @@ wrist3:
   axis:
     xyz: 0 1 0
   limit:
-    lower: -6.28
-    upper: 6.28
+    lower: -6.283185307179586
+    upper: 6.283185307179586
     effort: 10
     velocity: 3.14
